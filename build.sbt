@@ -5,7 +5,7 @@ lazy val root = (project in file(".")).
     version := "1.0.0",
     scalaVersion := "2.11.7",
 
-    name := "akka-http-mdc-logging",
+    name := "akka-http-mdc-logging-kamon",
 
 //    resolvers ++= Seq(
 //      "Kamon Repository Snapshots" at "http://snapshots.kamon.io"
