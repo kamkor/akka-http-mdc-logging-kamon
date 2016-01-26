@@ -1,4 +1,4 @@
-# akka-http-mdc-logging-kamon
+# akka-http-mdc-logging-kamon proof of concept
 
 I am evaluating akka-http as technology for writing some microservices at work. Being able to propagate requestId and some other parameters in MDC is very important to me. And since MDC doesn't really fit well in asynchronous environment, it can be quite tricky to propagate it in library like akka-http.
 
