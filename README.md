@@ -17,7 +17,7 @@ Cons of current solution:
 
 `sbt aspectj-runner:run`
 
-`curl -X GET -H "request-id: 127" "http://localhost:8080/greet/kamkor"`
+`curl -X GET -H "request-id: 321" "http://localhost:8080/greet/kamkor"`
 
 # Example output
 
