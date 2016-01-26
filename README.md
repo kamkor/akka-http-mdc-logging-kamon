@@ -22,11 +22,12 @@ Cons of current solution:
 # Example output
 
 ```
-mdcReqId[123] thread[system-akka.actor.default-dispatcher-6] reqId[123] - GreetEndpoint ### parsed request
-mdcReqId[123] thread[system-akka.greet-actor-dispatcher-7] reqId[123] - GreetActor ### Greet message
-mdcReqId[123] thread[pool-5-thread-13] reqId[123] - GreetActor ### generateGreet Future
-mdcReqId[123] thread[system-akka.actor.default-dispatcher-2] reqId[123] - GreetEndpoint ### completing request
-mdcReqId[123] thread[system-akka.greet-actor-dispatcher-7] reqId[123] - GreetActor ### GeneratedGreetMsg message
+akka.io.TcpListener mdcReqId[] New connection accepted
+me.kamkor.web.GreetEndpoint mdcReqId[321] reqId[321] thread[system-akka.actor.default-dispatcher-3] parsed request
+me.kamkor.actor.GreetActor mdcReqId[321] reqId[321] thread[system-akka.greet-actor-dispatcher-6] Greet message
+me.kamkor.actor.GreetActor mdcReqId[321] reqId[321] thread[pool-5-thread-5] generateGreet Future
+me.kamkor.web.GreetEndpoint mdcReqId[321] reqId[321] thread[system-akka.actor.default-dispatcher-4] completing request
+me.kamkor.actor.GreetActor mdcReqId[321] reqId[321] thread[system-akka.greet-actor-dispatcher-6] GeneratedGreetMsg message
 ```
 
 Note that GreetEndpoint, GreetActor and future execution in GreetActor use different execution contexts. GreetEndpoint uses default akka dispatcher. GreetActor uses its own akka dispatcher and Future in GreetActor is executed in custom ExecutionContext.

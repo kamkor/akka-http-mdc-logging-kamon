@@ -29,7 +29,7 @@ class GreetEndpoint(actorSystem: ActorSystem) extends Directives with MdcKeysSup
     // when using classic logger (not logger from akka), use MdcKeysSupport withMdc to propagate mdc from current context
     withMdc {
       // I am also logging requestId manually for testing/debugging purpouses of the solution
-      logger.info("thread[{}] reqId[{}] - GreetEndpoint ### {}", Thread.currentThread().getName(), requestId, msg)
+      logger.info("reqId[{}] thread[{}] {}", requestId, Thread.currentThread().getName(), msg)
     }
   }
 

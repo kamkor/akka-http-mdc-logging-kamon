@@ -2,7 +2,7 @@
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>mdcReqId[%X{requestId}] %msg%n</pattern>
+			<pattern>%logger{36} mdcReqId[%X{requestId}] %msg%n</pattern>
 		</encoder>
 	</appender>
 
