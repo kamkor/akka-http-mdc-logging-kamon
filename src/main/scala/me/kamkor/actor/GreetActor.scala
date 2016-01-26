@@ -45,7 +45,7 @@ class GreetActor extends Actor with ActorLogging {
   }
 
   private def logRequest(requestId: String, msg: String): Unit = {
-    // kamon-akka actor logging instrumentation propagates mdc :)
+    // kamon-akka actor instrumentation propagates mdc :) No need to use withMdc { .. } here
     log.info("thread[{}] reqId[{}] - GreetActor ### {}", Thread.currentThread().getName(), requestId, msg)
   }
 
