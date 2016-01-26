@@ -28,6 +28,7 @@ class GreetEndpoint(actorSystem: ActorSystem) extends Directives with MdcKeysSup
   private def logRequest(requestId: String, msg: String): Unit = {
     // when using classic logger (not logger from akka), use MdcKeysSupport withMdc to propagate mdc from current context
     withMdc {
+      // I am also logging requestId manually for testing/debugging purpouses of the solution
       logger.info("thread[{}] reqId[{}] - GreetEndpoint ### {}", Thread.currentThread().getName(), requestId, msg)
     }
   }
@@ -41,6 +42,7 @@ class GreetEndpoint(actorSystem: ActorSystem) extends Directives with MdcKeysSup
         logRequest(requestId, "parsed request")
 
         // context will be propagated to actor by kamon
+        // I am also passing requestId manually for testing/debugging purpouses of the solution
         val greetReplyF: Future[GreetReply] = (greetActor ? Greet(requestId, who)).mapTo[GreetReply]
 
         onSuccess(greetReplyF) { greetReply =>
