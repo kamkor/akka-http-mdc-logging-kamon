@@ -6,11 +6,15 @@ In this repository I am trying to propagate requestId in MDC with the help of ka
 
 Cons of current solution:
 
-* have to manually propagate mdc using withMdc { .. } when logging with normal (non akka) logger 
-* not publicly documented features of kamon.io https://github.com/kamon-io/Kamon/issues/272 http://kamon.io/integrations/logback/mdc-in-an-asyncronous-environment/
-* requires AspectJ Weaver agent
-* there's lots of magic in this solution
-* i didn't test this solution properly yet
+* Have to manually propagate mdc using withMdc { .. } when logging with normal (non akka) logger 
+* Not publicly documented features of kamon.io https://github.com/kamon-io/Kamon/issues/272 http://kamon.io/integrations/logback/mdc-in-an-asyncronous-environment/
+* Requires AspectJ Weaver agent
+* There's lots of magic in this solution
+
+# Todo
+
+* Make sure that propagation of TraceContext/MDC also works in the exception handler.
+* Write proper tests that verify that propagation works. Currently I have only tested it manually using curl, bash script, logs and my eyes. ;)
 
 # How to run
 
