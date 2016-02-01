@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "POST heartbeat " $1 " times" 
+echo "POST greet " $1 " times" 
 
 for i in $(eval echo {1..$1})
 do  
