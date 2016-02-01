@@ -7,10 +7,6 @@ lazy val root = (project in file(".")).
 
     name := "akka-http-mdc-logging-kamon",
 
-//    resolvers ++= Seq(
-//      "Kamon Repository Snapshots" at "http://snapshots.kamon.io"
-//    ),
-
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "2.2.4" % Test,
       "org.scalacheck" %% "scalacheck" % "1.12.2" % Test
@@ -19,8 +15,6 @@ lazy val root = (project in file(".")).
     libraryDependencies ++= {
       val akkaVersion = "2.4.1"
       val akkaHttpVersion = "2.0.2"
-      //val kamonVersion = "0.6.0-a9d5c5c61f7e5e189bf67baee2b13e21ebbaaf73"
-      val kamonVersion = "0.5.2"
 
       Seq(
         "com.typesafe.akka" %% "akka-actor" % akkaVersion,
@@ -31,23 +25,13 @@ lazy val root = (project in file(".")).
         "com.typesafe.akka" %% "akka-http-spray-json-experimental" % akkaHttpVersion,
         "com.typesafe.akka" %% "akka-http-xml-experimental" % akkaHttpVersion,
         "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0",
-        "ch.qos.logback" % "logback-classic" % "1.1.3",
-        "io.kamon" %% "kamon-core" % kamonVersion,
-        "io.kamon" %% "kamon-scala" % kamonVersion,
-        "io.kamon" %% "kamon-akka" % kamonVersion
+        "ch.qos.logback" % "logback-classic" % "1.1.3"
       )
-
 
     },
 
     crossPaths := false,
 
-    //aspectjSettings,
-
     javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 
-    //javaOptions in run <++= AspectjKeys.weaverOptions in Aspectj
-
-    //fork in run := true
-    //javaOptions in run <++= AspectjKeys.weaverOptions in Aspectj
   )

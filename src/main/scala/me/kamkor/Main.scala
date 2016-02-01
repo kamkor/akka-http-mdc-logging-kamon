@@ -3,12 +3,9 @@ package me.kamkor
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import kamon.Kamon
 import me.kamkor.web.GreetEndpoint
 
 object Main extends App {
-
-  Kamon.start()
 
   implicit val actorSystem = ActorSystem("system")
   implicit val materializer = ActorMaterializer()
@@ -24,7 +21,6 @@ object Main extends App {
     .flatMap(_.unbind()) // trigger unbinding from the port
     .onComplete(_ => {
        actorSystem.shutdown()
-       Kamon.shutdown()
     })
 
 }
