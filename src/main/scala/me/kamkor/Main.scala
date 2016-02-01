@@ -19,11 +19,11 @@ object Main extends App {
   val bindingFuture = Http().bindAndHandle(greetEndpoint.route, "localhost", 8080)
 
   println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
-  Console.readLine() // for the future transformations
+  scala.io.StdIn.readLine() // for the future transformations
   bindingFuture
     .flatMap(_.unbind()) // trigger unbinding from the port
     .onComplete(_ => {
-       actorSystem.shutdown()
+       actorSystem.terminate()
        Kamon.shutdown()
     })
 

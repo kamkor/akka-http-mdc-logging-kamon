@@ -7,7 +7,6 @@ In this repository I am trying to propagate requestId in MDC with the help of ka
 Cons of current solution:
 
 * have to manually propagate mdc using withMdc { .. } when logging with normal (non akka) logger 
-* it is easy to lose trace context in route directives. It has to be set again with Trace.withContext(context) { .. }
 * not publicly documented features of kamon.io https://github.com/kamon-io/Kamon/issues/272 http://kamon.io/integrations/logback/mdc-in-an-asyncronous-environment/
 * requires AspectJ Weaver agent
 * there's lots of magic in this solution

@@ -2,19 +2,19 @@ package me.kamkor.web
 
 
 import akka.actor.{ActorRef, ActorSystem}
-import akka.http.scaladsl.server.Directives
+import akka.http.scaladsl.server._
 import akka.util.Timeout
 import com.typesafe.scalalogging.LazyLogging
-import kamon.Kamon
+import kamon.trace.TraceLocal
 import kamon.trace.logging.MdcKeysSupport
-import kamon.trace.{TraceLocal, Tracer}
 import me.kamkor.actor.GreetActor
+import me.kamkor.directives.TracingDirectives
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
 
-class GreetEndpoint(actorSystem: ActorSystem) extends Directives with MdcKeysSupport with LazyLogging {
+class GreetEndpoint(actorSystem: ActorSystem) extends Directives with TracingDirectives with MdcKeysSupport with LazyLogging {
 
   import GreetActor._
   import akka.pattern.ask
@@ -34,10 +34,8 @@ class GreetEndpoint(actorSystem: ActorSystem) extends Directives with MdcKeysSup
   }
 
   val route =
-    (get & path("greet" / Segment) & headerValueByName("request-id")) { (who, requestId) =>
-      val context = Kamon.tracer.newContext("MDC")
-
-      Tracer.withContext(context) {
+    traceContextAwareRoute { // this directive make sure that TraceContext is available in the route below
+      (get & path("greet" / Segment) & headerValueByName("request-id")) { (who, requestId) =>
         TraceLocal.storeForMdc("requestId", requestId)
         logRequest(requestId, "parsed request")
 
@@ -46,15 +44,10 @@ class GreetEndpoint(actorSystem: ActorSystem) extends Directives with MdcKeysSup
         val greetReplyF: Future[GreetReply] = (greetActor ? Greet(requestId, who)).mapTo[GreetReply]
 
         onSuccess(greetReplyF) { greetReply =>
-          // context is unfortunately lost here, it must be set again
-          Tracer.withContext(context) {
-            logRequest(requestId, "completing request")
-          }
-          context.finish()
+          logRequest(requestId, "completing request")
           complete(greetReply.msg)
         }
       }
-
     }
 
 }
