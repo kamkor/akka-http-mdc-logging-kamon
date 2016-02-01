@@ -18,7 +18,7 @@ Cons of current solution:
 
 `curl -X GET -H "request-id: 321" "http://localhost:8080/greet/kamkor"`
 
-`/batchcurl.sh 20` where 20 is number of curls to execute
+`sh batchcurl.sh 20` where 20 is number of curls to execute
 
 # Example output
 
