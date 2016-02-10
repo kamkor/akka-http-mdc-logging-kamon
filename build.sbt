@@ -17,8 +17,8 @@ lazy val root = (project in file(".")).
     ),
 
     libraryDependencies ++= {
-      val akkaVersion = "2.4.1"
-      val akkaHttpVersion = "2.0.2"
+      val akkaVersion = "2.4.2-RC2"
+      val akkaHttpVersion = "2.0.3"
       //val kamonVersion = "0.6.0-a9d5c5c61f7e5e189bf67baee2b13e21ebbaaf73"
       val kamonVersion = "0.5.2"
 
